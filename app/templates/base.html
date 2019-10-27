@@ -1,26 +1,73 @@
-{% extends 'bootstrap/base.html'%}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="navbar navbar-inverse" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"> Watchlist </a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Heebo|Playfair+Display&display=swap" rel="stylesheet">
+    <link href="{{url_for('static',filename='animate.css')}}" rel="stylesheet" type="text/css">
+</head>
 
+<body>
+    <nav class="navbar sticky-top bg-dark">
+        <div class="container navbr">
+            <a class="navbar-text" href="/">Home</a>
+        </div>
+
+    </nav>
+
+
+    <div class="container-fluid"
+        style="background-image: url(https://cdn2.unrealengine.com/blogAssets%2F2017%2FAUGUST+2017%2FDavid+at+SIGGRAPH+2017%2FFEATURE_David_SIGGRAPH_2017-1920x960-b6028804ea3cb1c981a7851d824fc744ed820204.jpg); height: 480px; background-repeat:no-repeat; background-position: top;     background-size: cover;">
+        <div class="text-white text-center rgba-stylish-strong py-5 px-9">
+            <div class="py-5">
+                <h2 class="h2 text-white animated heartBeat" style="font-family: 'Abril Fatface', cursive;"><i
+                        class="far fa-newspaper"></i> GZRU</h2>
+            </div>
         </div>
     </div>
-        <!-- Content block -->
 
-        {% block content %}
 
-        {% endblock%}
- 
+
+
+
+    <!-- Content block -->
+
+    {% block content %}
+    <!-- Navbar block  -->
+    <!-- {% block navbar %}
+    {% include 'navbar.html' %}
+    {% endblock %} -->
+
+    {% endblock%}
+
+
+
+    <div class="container-fluid footer">
+        <footer id="sticky-footer" class="py-4 text-white-50">
+            <div class="container text-center">
+                <small>Copyright &copy; Gichuru Isaac</small>
+            </div>
+
+        </footer>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+
+</body>
+
+</html>
