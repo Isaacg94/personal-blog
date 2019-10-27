@@ -1,6 +1,5 @@
 import unittest
-from models import quote
-Quote = quote.Quote
+from app.models import Quote
 
 class QuoteTest(unittest.TestCase):
     '''
@@ -16,6 +15,3 @@ class QuoteTest(unittest.TestCase):
     def test_instance(self):
         self.assertTrue(isinstance(self.new_quote,Quote))
 
-
-if __name__ == '__main__':
-    unittest.main()

@@ -1,11 +1,13 @@
-from app import app
 import urllib.request,json
-from .models import quote
+from .models import Quote
 
 
 # Getting the movie base url
-base_url = app.config["QUOTE_BASE_URL"]
+base_url = None
 
+
+def configure_request(app):
+    base_url = app.config['QUOTE_BASE_URL']
 
 def get_quotes():
     '''
