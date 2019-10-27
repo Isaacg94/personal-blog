@@ -13,20 +13,20 @@ def index():
     '''
     title = 'GZRU | Home'
     # random_quotes = get_quotes
-    return render_template('.index.html', title=title)
+    return render_template('index.html', title=title)
 
 
-@main.route('/post/comment/new/<int:id>', methods = ['GET','POST'])
-def new_comment(id):
-    form = CommentForm()
-    post = get_post(id)
+# @main.route('/post/comment/new/<int:id>', methods = ['GET','POST'])
+# def new_comment(id):
+#     form = CommentForm()
+#     post = get_post(id)
 
-    if form.validate_on_submit():
-        title = form.title.data
-        comment = form.comment.data
-        new_comment = Comment(post.id,title,comment)
-        new_comment.save_comment()
-        return redirect(url_for('post',id = post.id ))
+#     if form.validate_on_submit():
+#         title = form.title.data
+#         comment = form.comment.data
+#         new_comment = Comment(post.id,title,comment)
+#         new_comment.save_comment()
+#         return redirect(url_for('post',id = post.id ))
 
-    title = f'{post.title} comment'
-    return render_template('.new_comment.html',title = title, comment_form=form, post=post)
+#     title = f'{post.title} comment'
+#     return render_template('new_comment.html',title = title, comment_form=form, post=post)
