@@ -1,3 +1,4 @@
+{% extends 'base.html'%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,14 +14,22 @@
 </head>
 
 <body>
+    {% block content %}
+
+
+    
     <!-- Random quotes section 
     <h3> Random Quotes</h3>
     <ul>
        {% for rndm_quote in quotes %}
            <li>{{ rndm_quote.quote}}</li>
            <li>{{ rndm_quote.author}}</li>
-       {% endfor %} -->
-   </ul>
+       {% endfor %}
+   </ul> -->
+
+
+
+    {% endblock%}
 
 </body>
 
