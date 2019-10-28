@@ -1,9 +1,10 @@
 from flask import render_template,request,redirect,url_for
 from . import main
 from ..request import get_quotes
-from ..models import Comment
-from .forms import CommentForm
+from ..models import Comment,User
+from .forms import CommentForm,RegistrationForm
 from flask_login import login_required
+from .. import db
 
 # Views
 @main.route('/')
@@ -32,3 +33,16 @@ def new_comment(id):
 
     title = f'{post.title} comment'
     return render_template('new_comment.html',title = title, comment_form=form, post=post)
+
+
+
+@auth.route('/register',methods = ["GET","POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('auth.login'))
+        title = "New Account"
+    return render_template('auth/register.html',registration_form = form)
