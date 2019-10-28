@@ -32,17 +32,21 @@ def new_post():
 
     return render_template('new_post.html',post_form=post_form)
 
+@main.route('/post/<int:id>', methods = ['GET','POST'])
+def single_post(id):
+    post = Post.query.get(id)
+    return render_template('single_post.html',title=post.post_title, post=post)
 
 @main.route('/post/comment/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_comment(id):
     form = CommentForm()
-    post = get_all_posts(id)
+    post = get_post(id)
 
     if form.validate_on_submit():
-        title = form.title.data
         comment = form.comment.data
-        new_comment = Comment(post.id,title,comment)
+
+        new_comment = Comment(post.id,comment)
         new_comment.save_comment()
         return redirect(url_for('post',id = post.id ))
 

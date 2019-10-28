@@ -67,7 +67,7 @@ class Post(db.Model):
         return posts
 
     @classmethod
-    def get_post(cls):
+    def get_post(cls,id):
         return Post.query.filter_by(id)
 
 
