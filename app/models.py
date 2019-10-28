@@ -1,3 +1,4 @@
+from flask_login import UserMixin
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 
@@ -46,10 +47,11 @@ class Quote:
         self.permalink = permalink
 
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(255))
+    username = db.Column(db.String(255),index = True)
+    email = db.Column(db.String(255),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     password_secure = db.Column(db.String(255))
 
