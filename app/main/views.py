@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..request import get_quotes
 from ..models import Comment,User
-from .forms import CommentForm
+from .forms import CommentForm,UpdateProfile
 from flask_login import login_required
 from .. import db
 
@@ -33,7 +33,7 @@ def new_comment(id):
 
     title = f'{post.title} comment'
     return render_template('new_comment.html',title = title, comment_form=form, post=post)
-    
+
 
 @main.route('/user/<uname>')
 def profile(uname):
