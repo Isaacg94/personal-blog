@@ -2,6 +2,7 @@ from flask_login import UserMixin
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import login_manager
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -9,7 +10,13 @@ def load_user(user_id):
 
 class Comment:
 
-    all_comments = []
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer,primary_key = True)
+    comment = db.Column(db.String)
+    post_id = db.Column(db.Integer,db.ForeignKey('posts.id'))
+    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __init__(self,post_id,title,comment):
         self.post_id = post_id
