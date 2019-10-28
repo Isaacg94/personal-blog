@@ -1,4 +1,4 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..request import get_quotes
 from ..models import Comment,User
@@ -33,4 +33,13 @@ def new_comment(id):
 
     title = f'{post.title} comment'
     return render_template('new_comment.html',title = title, comment_form=form, post=post)
+    
 
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
