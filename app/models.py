@@ -8,7 +8,7 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class Comment:
+class Comment(db.Model):
 
     __tablename__ = 'comments'
 
@@ -51,7 +51,7 @@ class Post(db.Model):
     posted_at = db.Column(db.DateTime)
     post_by = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    comments = db.relationship("Comment",foreign_keys = "Comment.post_id",backref = "post",lazy = "dynamic")
+    comments = db.relationship("Comment",backref = "post",lazy = "dynamic")
 
     def save_post(self):
         db.session.add(self)
@@ -67,8 +67,8 @@ class Post(db.Model):
         return posts
 
     @classmethod
-    def get_all_posts(cls):
-        return Post.query.order_by(Post.posted_at).all()
+    def get_post(cls):
+        return Post.query.filter_by(id)
 
 
 class Quote:

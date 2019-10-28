@@ -1,28 +1,43 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..request import get_quotes
-from ..models import Comment,User
-from .forms import CommentForm,UpdateProfile
-from flask_login import login_required
+from ..models import Comment,User,Post
+from .forms import CommentForm,UpdateProfile,PostForm
+from flask_login import login_required,current_user
+import datetime
 from .. import db,photos
 
 # Views
 @main.route('/')
 def index():
+    posts = Post.query.all()
+    
 
-    '''
-    View root page function that returns the index page and its data
-    '''
     title = 'GZRU | Home'
     # random_quotes = get_quotes
-    return render_template('index.html', title=title)
+    return render_template('index.html', title=title,posts=posts,)
+
+@main.route('/new_post/', methods = ['GET','POST'])
+@login_required
+def new_post():
+
+    post_form = PostForm()
+    if post_form.validate_on_submit():
+        post_title = post_form.title.data
+        post_content = post_form.blogpost.data
+
+        new_post = Post(post_title = post_title,post_content = post_content, user_id = current_user.id)
+        new_post.save_post()
+        return redirect(url_for('main.index'))
+
+    return render_template('new_post.html',post_form=post_form)
 
 
 @main.route('/post/comment/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_comment(id):
     form = CommentForm()
-    post = get_post(id)
+    post = get_all_posts(id)
 
     if form.validate_on_submit():
         title = form.title.data
