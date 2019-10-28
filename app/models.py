@@ -17,15 +17,19 @@ class Comment:
     post_id = db.Column(db.Integer,db.ForeignKey('posts.id'))
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
-    def __init__(self,post_id,title,comment):
-        self.post_id = post_id
-        self.title = title
-        self.comment = comment
+    comment_by = db.Column(db.String)
 
 
     def save_comment(self):
-        Comment.all_comments.append(self)
+        db.session.add(self)
+        db.session.commit()
+
+    
+    @classmethod
+    def delete_comment(cls, id):
+        gone = Comment.query.filter_by(id = id).first()
+        db.session.delete(gone)
+        db.session.commit()
 
 
     @classmethod
@@ -34,14 +38,8 @@ class Comment:
 
     @classmethod
     def get_comments(cls,id):
-
-        response = []
-
-        for comment in cls.all_comments:
-            if comment.post_id == id:
-                response.append(comment)
-
-        return response
+        comments = Comment.query.filter_by(post_id = id).all()
+        return comments
 
 
 
