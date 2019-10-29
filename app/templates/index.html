@@ -16,13 +16,15 @@
 <body>
     {% block content %}
     <div class="container-fluid"
-        style="background-image: url(https://cdn2.unrealengine.com/blogAssets%2F2017%2FAUGUST+2017%2FDavid+at+SIGGRAPH+2017%2FFEATURE_David_SIGGRAPH_2017-1920x960-b6028804ea3cb1c981a7851d824fc744ed820204.jpg); height: 480px; background-repeat:no-repeat; background-position: top; background-size: cover; background-attachment: fixed; background-position: center;">
+        style="background-image: url(https://cdn2.unrealengine.com/blogAssets%2F2017%2FAUGUST+2017%2FDavid+at+SIGGRAPH+2017%2FFEATURE_David_SIGGRAPH_2017-1920x960-b6028804ea3cb1c981a7851d824fc744ed820204.jpg); height: 480px; background-repeat:no-repeat; background-position: top; background-size: cover; background-attachment: fixed; background-position: center; margin-bottom: 4%; ">
         <div class="text-white text-center rgba-stylish-strong py-5 px-4">
             <div class="py-5">
                 <h2 class="h2 text-white animated heartBeat"
                     style="font-family: 'Abril Fatface', cursive; font-size: 40px; margin-top: 7.5%; text-shadow: 1px 1px 4px#000;">
                     <i class="gzru fa-newspaper"></i>
                     GZRU</h2>
+                <h4>{{ quotes["author"] }}</h4>
+                <p>{{quotes["quote"]}}</p>
             </div>
         </div>
     </div>

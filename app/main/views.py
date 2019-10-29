@@ -6,6 +6,7 @@ from .forms import CommentForm,UpdateProfile,PostForm
 from flask_login import login_required,current_user
 import datetime
 from .. import db,photos
+import requests
 
 # Views
 @main.route('/')
@@ -14,8 +15,9 @@ def index():
     
 
     title = 'GZRU | Home'
+    quotes = requests.get("http://quotes.stormconsultancy.co.uk/random.json").json()
     # random_quotes = get_quotes
-    return render_template('index.html', title=title,posts=posts,)
+    return render_template('index.html', title=title,posts=posts, quotes = quotes)
 
 @main.route('/new_post/', methods = ['GET','POST'])
 @login_required
@@ -34,24 +36,40 @@ def new_post():
 
 @main.route('/post/<int:id>', methods = ['GET','POST'])
 def single_post(id):
-    post = Post.query.get(id)
-    return render_template('single_post.html',title=post.post_title, post=post)
-
-@main.route('/post/comment/new/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_comment(id):
+    post = Post.query.filter_by(id=id).first()
+    comments = Comment.query.filter_by(post_id=id).all()
     form = CommentForm()
-    post = get_post(id)
 
     if form.validate_on_submit():
         comment = form.comment.data
+        form.comment.data =''
 
-        new_comment = Comment(post.id,comment)
-        new_comment.save_comment()
-        return redirect(url_for('post',id = post.id ))
+        new_comment = Comment(comment=comment,post_id=post.id,user_id=current_user.id,comment_by=current_user.username)
 
-    title = f'{post.title} comment'
-    return render_template('new_comment.html',title = title, comment_form=form, post=post)
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return redirect(url_for('main.single_post', id = post.id))
+
+
+    return render_template('single_post.html', post=post, comments=comments, form=form)
+
+
+# @main.route('/post/comment/new/<int:id>', methods = ['GET','POST'])
+# @login_required
+# def new_comment(id):
+
+#     form = CommentForm()
+
+#     if form.validate_on_submit():
+#         comment = form.comment.data
+
+#         new_comment = Comment(post.id,comment)
+#         new_comment.save_comment()
+#         return redirect(url_for('post',id = post.id ))
+
+#     title = f'{post.title} comment'
+#     return render_template('new_comment.html',title = title, comment_form=form, post=post)
 
 
 @main.route('/user/<uname>')
@@ -94,3 +112,14 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+
+@main.route('/post/<int:id>/delete', methods = ['POST'])
+@login_required
+def delete_post(id):
+    post = Post.query.filter_by(id = id).first()
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(url_for('main.index'))
+
