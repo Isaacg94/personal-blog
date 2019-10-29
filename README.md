@@ -1,4 +1,4 @@
-# GitHub Search
+# Personal Blog
 
 ![alt text](app/static/images/screenshot1.png)
 
@@ -9,7 +9,7 @@
 
 A web application made using Python's Flask that allows a user to create blog posts on the webpage.
 
-**[Live-Link to site.](https://warm-fortress-70157.herokuapp.com/)**
+**[Live-Link to site.](https://personal-blog-isaac.herokuapp.com/)**
 ## Features
 * A landing page with a list of all the posted blogs.
 * A display of random quotes.
@@ -29,9 +29,9 @@ A web application made using Python's Flask that allows a user to create blog po
 ## Setup/Installation Requirements
 Here is a run through of how to set up the application:
 * Step 1 : Clone this repository using the git clone link:
-  * **`git clone https://github.com/Isaacg94/one-minute-pitch.git`**
+  * **`git clone https://github.com/Isaacg94/personal-blog.git`**
 * Step 2 : Navigate to the directory:
-  * **`cd one-minute-pitch-master`**
+  * **`cd personal-blog-master`**
 * Step 3 : Open the directory created with your favorite IDE. If Atom type **`atom .`** if VSCode type **`code .`** . This will lauch the editor with the project setup,
 * Now feel free to hack around the project.
 
