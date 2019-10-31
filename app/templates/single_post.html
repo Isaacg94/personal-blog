@@ -3,13 +3,13 @@
 {% block content %}
 <div class="container">
     <div class="card">
-        <h1><strong>{{post.post_title}}</strong></h1>
+        <h1 class="blog_title"><strong>{{post.post_title}}</strong></h1>
         <div>
             <button type="button" class="btn-danger btn-sm m-1" data-toggle="modal"
                 data-target="#deleteModal">Delete</button>
         </div>
         <hr>
-        <h3>{{post.post_content}}</h3>
+        <h3 class="blog_content">{{post.post_content}}</h3>
 
 
     </div>

@@ -38,8 +38,9 @@
         
         {%for post in posts%}
         <div class="card">
-            <h1><strong></strong><a href="{{url_for('main.single_post', id = post.id)}}"">{{post.post_title}}</a></strong></h1>
-            <h3>{{post.post_content | truncate (45) | safe}}</h3>
+            <h1><strong></strong><a href="{{url_for('main.single_post', id = post.id)}}"" class="
+                blog_title" >{{post.post_title}}</a></strong></h1>
+            <h3 class="blog_content">{{post.post_content | truncate (200) | safe}}</h3>
             <hr>
 
 
